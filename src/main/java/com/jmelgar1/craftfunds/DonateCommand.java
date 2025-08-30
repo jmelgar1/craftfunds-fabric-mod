@@ -51,8 +51,9 @@ public class DonateCommand {
             // Get the player who executed the command
             ServerPlayerEntity player = source.getPlayerOrThrow();
             
-            // Create clickable PayPal donation link as URI
-            URI donationUri = URI.create("https://www.paypal.com/ncp/payment/QNL7HQGENJB74");
+            // Create clickable PayPal donation link as URI from config
+            String donationUrl = ConfigManager.getInstance().getPayPalDonationUrl();
+            URI donationUri = URI.create(donationUrl);
             final Text clickableLink = Text.literal("Click here to donate!").styled(s -> 
                 s.withClickEvent(new ClickEvent.OpenUrl(donationUri))
                     .withHoverEvent(new HoverEvent.ShowText(Text.literal("Click to Open Link!")))

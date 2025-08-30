@@ -65,6 +65,21 @@ public class DatabaseService {
         }
     }
     
+    /**
+     * Formats a dollar amount to show whole numbers without decimals
+     * @param amount the amount to format
+     * @return formatted string (e.g., "15" for 15.00, "15.01" for 15.01)
+     */
+    private String formatAmount(double amount) {
+        if (amount == Math.floor(amount)) {
+            // It's a whole number, format without decimals
+            return String.format("%.0f", amount);
+        } else {
+            // Has decimal places, format with 2 decimal places
+            return String.format("%.2f", amount);
+        }
+    }
+    
     private double getTotalSpending(Connection connection) throws SQLException {
         String query = "SELECT total_spent FROM total_spending LIMIT 1";
         try (PreparedStatement stmt = connection.prepareStatement(query);
@@ -149,7 +164,7 @@ public class DatabaseService {
                                     detailsText.append(Text.literal(count + ". "))
                                               .append(Text.literal(donorName).styled(style -> style.withColor(nameColor)))
                                               .append(Text.literal(": "))
-                                              .append(Text.literal("$" + String.format("%.2f", excessAmount)).styled(style -> style.withColor(amountColor)))
+                                              .append(Text.literal("$" + formatAmount(excessAmount)).styled(style -> style.withColor(amountColor)))
                                               .append(Text.literal(" ("))
                                               .append(Text.literal(donationDate.format(DateTimeFormatter.ofPattern("MM-dd"))).styled(style -> style.withColor(dateColor)))
                                               .append(Text.literal(")\n"));
@@ -166,7 +181,7 @@ public class DatabaseService {
                                 detailsText.append(Text.literal(count + ". "))
                                           .append(Text.literal(donorName).styled(style -> style.withColor(nameColor)))
                                           .append(Text.literal(": "))
-                                          .append(Text.literal("$" + String.format("%.2f", amount)).styled(style -> style.withColor(amountColor)))
+                                          .append(Text.literal("$" + formatAmount(amount)).styled(style -> style.withColor(amountColor)))
                                           .append(Text.literal(" ("))
                                           .append(Text.literal(donationDate.format(DateTimeFormatter.ofPattern("MM-dd"))).styled(style -> style.withColor(dateColor)))
                                           .append(Text.literal(")\n"));
@@ -201,7 +216,7 @@ public class DatabaseService {
                     summary = "§c No donations found.";
                 } else {
                     String donationText = excessDonationCount == 1 ? "donation" : "donations";
-                    summary = String.format("§6$%.2f / $15 §7(%d %s)", netAmount, excessDonationCount, donationText);
+                    summary = String.format("§6$%s / $15 §7(%d %s)", formatAmount(netAmount), excessDonationCount, donationText);
                 }
                 
                 return new FundingReport(summary, detailsText, totalUSD, totalSpending);

@@ -69,6 +69,7 @@ public class ConfigManager {
         props.setProperty("database.username", "your_username_here");
         props.setProperty("database.password", "your_password_here");
         props.setProperty("database.timeout.seconds", "10");
+        props.setProperty("paypal.donation.url", "https://www.paypal.com/ncp/payment/QNL7HQGENJB74");
     }
     
     private void loadDefaultValues() {
@@ -96,6 +97,10 @@ public class ConfigManager {
             CraftFunds.LOGGER.warn("Invalid database timeout value in config, using default of 10 seconds");
             return 10;
         }
+    }
+    
+    public String getPayPalDonationUrl() {
+        return config.getProperty("paypal.donation.url", "https://www.paypal.com/ncp/payment/QNL7HQGENJB74");
     }
     
     public boolean hasValidDatabaseCredentials() {

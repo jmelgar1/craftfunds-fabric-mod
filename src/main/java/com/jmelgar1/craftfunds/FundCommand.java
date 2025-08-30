@@ -105,12 +105,13 @@ public class FundCommand {
                 
                 // Calculate and display months covered or funding goal message
                 if (report.netAmount < 15) {
-                    player.sendMessage(Text.literal("§cServer is below the funding goal"), false);
+                    player.sendMessage(Text.literal("§cServer is below the funding goal, use /donate"), false);
                 } else {
                     int monthsCovered = (int) Math.floor(report.netAmount / 15.0);
                     if (monthsCovered > 0) {
                         String monthText = monthsCovered == 1 ? "month" : "months";
                         player.sendMessage(Text.literal("§7Covers " + monthsCovered + " " + monthText + " of server costs"), false);
+                        player.sendMessage(Text.literal("§7Use '/donate' to fund the server"), false);
                     }
                 }
                 
