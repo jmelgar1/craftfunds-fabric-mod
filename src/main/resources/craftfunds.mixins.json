@@ -1,7 +1,7 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "com.example.craftfunds.mixin",
+    "package": "com.jmelgar1.craftfunds.mixin",
     "compatibilityLevel": "JAVA_21",
     "refmap": "craftfunds.refmap.json",
     "mixins": [
