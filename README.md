@@ -1,10 +1,13 @@
-# CraftFunds Fabric Mod
+# CraftFunds
 
-This mod is for a private Minecraft server to manage and track server funds to keep the server online. The mod reads from a MySQL database that is written to by a webhook that responds to PayPal events. 
+A simple Fabric mod for a private Minecraft server that helps track and display server funding information to players.
 
-Webhook Server can be viewed here: https://github.com/jmelgar1/craftfunds-webhook
+## Features
 
-Player Commands:
-
-**/fund** - View current server funds.<br>
-**/donate** - Get a paypal payment link.
+- **Automatic funding display**: Shows current funding status when players join the server
+- **Interactive donation tracking**: Hover over donation info for detailed breakdown
+- **Commands**:
+  - `/fund` - Check current funding status
+  - `/donate` - Get donation information
+- **Server-only mod**: Runs only on the server, no client installation needed
+- **Monthly funding goals**: Tracks progress toward server cost coverage
